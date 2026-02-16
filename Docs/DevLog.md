@@ -22,3 +22,21 @@ Estimated focused development time: ~2 hours
   - EventBus
   - Game state machine (State pattern)
   - GameCompositionRoot
+  
+  
+## S2 – Application Infrastructure & UI State Flow
+Estimated focused development time: ~2.5 hours
+
+### Done
+- Implemented `IGameState` and `GameStateMachine` in Core (no UnityEngine dependency).
+- Implemented EventBus abstraction `IEventBus` and `DictionaryEventBus` (Subscribe/Unsubscribe/Publish).
+- Implemented framework `GameStateBase` with `SetNextState(IGameState)` and `GoToNextState()`.
+- Created a single Canvas with three panels: MainMenu / Gameplay / GameOver.
+- Implemented panel Views and wired them to raise UI events.
+- Implemented `GameCompositionRoot` to instantiate and wire `GameStateMachine`, EventBus, and all states.
+- Implemented `MainMenuState` to show panel, subscribe to Start, and transition to Gameplay.
+- Implemented `LevelGameplayState` to show panel, subscribe to EndGame, and transition to GameOver.
+- Implemented `GameOverState` to show panel, subscribe to Restart, and transition back to Gameplay.
+
+### Next
+- Implement enemies: prefab + basic runtime + domain, waypoint movement, spawner, and minimal waves.
