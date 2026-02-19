@@ -1,9 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Framework.Runtime.GameStates
+namespace Framework.UI
 {
     public class GameOverView : MonoBehaviour
     {

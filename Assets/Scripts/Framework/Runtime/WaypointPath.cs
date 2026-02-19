@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Framework.Runtime
 {
-    public sealed class WaypointPath : MonoBehaviour, IPathProvider
+    public class WaypointPath : MonoBehaviour, IPathProvider
     {
         [SerializeField] private Transform[] waypoints = new Transform[0];
 

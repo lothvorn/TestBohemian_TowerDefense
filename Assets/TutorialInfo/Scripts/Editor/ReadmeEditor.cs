@@ -71,7 +71,7 @@ public class ReadmeEditor : Editor
         var assembly = typeof(EditorApplication).Assembly;
         var windowLayoutType = assembly.GetType("UnityEditor.WindowLayout", true);
         var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
-        method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "TutorialInfo/Layout.wlt"), false });
+        method.Invoke(null, new object[] { Path.Combine(global::UnityEngine.Application.dataPath, "TutorialInfo/Layout.wlt"), false });
     }
 
     static Readme SelectReadme()
@@ -141,7 +141,7 @@ public class ReadmeEditor : Editor
             {
                 if (LinkLabel(new GUIContent(section.linkText)))
                 {
-                    Application.OpenURL(section.url);
+                    global::UnityEngine.Application.OpenURL(section.url);
                 }
             }
 

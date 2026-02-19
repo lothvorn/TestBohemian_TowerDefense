@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public sealed class TowerSlot : MonoBehaviour
+namespace Framework.Runtime
 {
-    [SerializeField] private Transform towerAnchor;
-
-    private Transform currentTowerTransform;
-
-    public bool IsOccupied => currentTowerTransform != null;
-
-    public Transform Anchor => towerAnchor;
-
-    public Transform CurrentTowerTransform => currentTowerTransform;
-
-    public void AssignTower(Transform towerTransform)
+    public class TowerSlot : MonoBehaviour
     {
-        currentTowerTransform = towerTransform;
-    }
+        [SerializeField] private Transform towerAnchor;
 
-    public void Clear()
-    {
-        currentTowerTransform = null;
+        private Transform currentTowerTransform;
+
+        public bool IsOccupied => currentTowerTransform != null;
+
+        public Transform Anchor => towerAnchor;
+
+        public Transform CurrentTowerTransform => currentTowerTransform;
+
+        public void AssignTower(Transform towerTransform)
+        {
+            currentTowerTransform = towerTransform;
+        }
+
+        public void Clear()
+        {
+            currentTowerTransform = null;
+        }
     }
 }

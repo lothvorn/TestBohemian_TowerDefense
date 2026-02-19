@@ -24,6 +24,8 @@ Estimated focused development time: ~2 hours
   - GameCompositionRoot
   
   
+
+
 ## S2 – Application Infrastructure & UI State Flow
 Estimated focused development time: ~2.5 hours
 
@@ -40,3 +42,27 @@ Estimated focused development time: ~2.5 hours
 
 ### Next
 - Implement enemies: prefab + basic runtime + domain, waypoint movement, spawner, and minimal waves.
+
+
+
+
+## S3 – Enemies, Waves & Fortress Attack Loop
+Estimated focused development time: 4 hours
+
+### Done
+- Added enemy domain model with validated constructor invariants (speed, hp, reward, strength) and damage handling.
+- Created enemy ScriptableObject definitions and an EnemiesLibrary to support multiple enemy types.
+- Implemented runtime enemy spawning via EnemySpawner using EnemyDefinition prefabs.
+- Implemented path following movement for enemies using IPathProvider waypoints.
+- Added framework “sensors” to publish AttackFortressCommand when an enemy reaches the goal.
+- Implemented AttackFortress use case and Fortress domain model; publishes FortressDestroyedEvent when lives reach zero.
+- Wired PlayingGameState to react to FortressDestroyedEvent and transition to GameOverState.
+- Implemented wave spawning via WaveDefinition ScriptableObject (bursts) and WaveSpawner; starts/stops with PlayingGameState.
+- Added EnemiesService + EnemyLifecycle to manage enemy lifetime and cleanup (goal reached and state exit).
+
+### Notes
+- Enemy pooling intentionally omitted due to time constraints.
+- Commands vs events clarified; marker interfaces ICommand/IEvent added for navigation (bus enforcement noted as future improvement).
+
+### Next
+- S4: Towers (build on slots, targeting, damage, enemy death + reward economy) and basic HUD feedback.

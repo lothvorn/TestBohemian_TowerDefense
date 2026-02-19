@@ -1,8 +1,9 @@
-using UnityEngine;
-
-public interface IGameState
+namespace Core
 {
-    void Enter();
-    void Exit();
+    public interface IGameState
+    {
+        void Enter();
+        void Exit();
 
+    }
 }
