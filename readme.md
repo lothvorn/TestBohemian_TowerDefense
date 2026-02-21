@@ -13,8 +13,10 @@ The goal of this project is to implement a simple, scalable tower defense protot
 
 The focus of the implementation is:
 - Clean architecture
-- Performance awareness
 - Scalability
-- Clear development breakdown
 
-More detailed documentation will be provided in the final submission.
+
+## Deliverables
+-Documents in folder ./Docs
+-WebGL build in folder ./Builds
+
