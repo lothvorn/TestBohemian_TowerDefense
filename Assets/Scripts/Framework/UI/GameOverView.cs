@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +8,16 @@ namespace Framework.UI
     public class GameOverView : MonoBehaviour
     {
         [SerializeField] private Button _restartButton;
-        [SerializeField] private Button _exitButton;
+        [SerializeField] private TMP_Text _scoreText;
+        [SerializeField] private TMP_Text _gameEndText;
 
         public event Action RestartClicked;
-        public event Action ExitClicked;
+        
 
         private void Awake()
         {
             _restartButton.onClick.AddListener(OnRestartClicked);
-            _exitButton.onClick.AddListener(OnExitClicked);
+        
         }
 
         private void OnRestartClicked()
@@ -23,9 +25,17 @@ namespace Framework.UI
             RestartClicked?.Invoke();
         }
 
-        private void OnExitClicked()
+        public void SetScreenValues(int score, bool gameWon)
         {
-            ExitClicked?.Invoke();
+            _scoreText.text = "Final score " + score;
+            if (gameWon)
+                _gameEndText.text = "Victory";
+            else
+            {
+                _gameEndText.text = "Defeat";
+            }
+
         }
+
     }
 }

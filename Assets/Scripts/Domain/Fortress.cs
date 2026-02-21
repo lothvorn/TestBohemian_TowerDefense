@@ -2,13 +2,16 @@
 {
     public class Fortress
     {
+        private int _initialLives;
         public int Lives { get; private set; }
 
-        public Fortress(int lives)
+        public Fortress(int initialLives)
         {
-            if (lives <= 0) throw new System.ArgumentOutOfRangeException(nameof(lives), "Lives must be > 0.");
-            
-            Lives = lives;
+            if (initialLives <= 0) throw new System.ArgumentOutOfRangeException(nameof(initialLives), "Lives must be > 0.");
+
+            _initialLives = initialLives;
+
+            Reset();
         }
 
         public void ReceiveDamage(int damage)
@@ -22,6 +25,11 @@
         public bool IsDestroyed()
         {
             return Lives <= 0;
+        }
+
+        public void Reset()
+        {
+            Lives = _initialLives;
         }
     }
 }

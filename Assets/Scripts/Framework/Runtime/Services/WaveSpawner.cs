@@ -1,4 +1,6 @@
-﻿using Framework.Runtime.Enemies;
+﻿using Application.Events;
+using Core.MessageBus;
+using Framework.Runtime.Enemies;
 using Framework.Runtime.Waves;
 using UnityEngine;
 
@@ -9,15 +11,23 @@ namespace Framework.Runtime.Services
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemiesLibrary _enemiesLibrary;
         [SerializeField] private WaveDefinition _waveDefinition;
-        
+
+        private IMessageBus _messageBus;
+
         private int _currentBurstIndex;
         private int _remainingInBurst;
         private float _nextSpawntime;
+
+        public void Initialize(IMessageBus messageBus)
+        {
+            _messageBus = messageBus;
+        }
 
         private void Awake()
         {
             StopWave();
         }
+
 
         public void StartWave()
         {
@@ -40,7 +50,6 @@ namespace Framework.Runtime.Services
 
         private void Update()
         {
-            
             if (Time.time <= _nextSpawntime)
                 return;
             SpawnEnemyFromBurst();
@@ -51,6 +60,8 @@ namespace Framework.Runtime.Services
             if (_currentBurstIndex >= _waveDefinition.Bursts.Length)
             {
                 enabled = false;
+
+                _messageBus.Publish(new AllWavesSpawned());
                 return;
             }
 

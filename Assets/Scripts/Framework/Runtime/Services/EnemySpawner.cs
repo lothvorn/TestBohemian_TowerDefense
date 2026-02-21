@@ -34,18 +34,19 @@ namespace Framework.Runtime.Services
 
         private void InitializeEnemyPrefabComponents(EnemyDefinition enemyDefinition, EnemyView enemyView)
         {
-            Enemy enemyEntity = enemyDefinition.CreateEnemyEntity();
+            string enemyName = "Enemy_" + Time.time;
+            Enemy enemyEntity = enemyDefinition.CreateEnemyEntity(enemyName);
             
             enemyView.SetEnemyEntity(enemyEntity);
             InitializePathFollower(enemyView, enemyEntity);
 
-            FortressAttackSensor fortressAttackSensor = enemyView.GetComponent<FortressAttackSensor>();
-            fortressAttackSensor.Initialize(_messageBus);
+            FortressAttackCommandPublisher fortressAttackCommandPublisher = enemyView.GetComponent<FortressAttackCommandPublisher>();
+            fortressAttackCommandPublisher.Initialize(_messageBus);
 
-            IEnemyLIfecycle enemyLIfecycle = enemyView.GetComponent<IEnemyLIfecycle>();
-            enemyLIfecycle.Initialize(_enemiesService);
+            EnemyLifecycle enemyLifecycle = enemyView.GetComponent<EnemyLifecycle>();
+            enemyLifecycle.Initialize(_enemiesService, enemyEntity);
             
-            _enemiesService.Register(enemyLIfecycle);
+            _enemiesService.Register(enemyLifecycle);
         }
 
         private void InitializePathFollower(EnemyView enemyView, Enemy enemyEntity)

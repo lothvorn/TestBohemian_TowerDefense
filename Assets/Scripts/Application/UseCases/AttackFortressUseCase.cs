@@ -32,7 +32,8 @@ namespace Application.UseCases
         private void Execute(AttackFortressCommand command)
         {
             _fortress.ReceiveDamage(command.Damage);
-
+            _messageBus.Publish(new EnemyReachedFortressEvent(command.EnemyLifecycle, command.Damage));
+            
             if (_fortress.IsDestroyed())
             {
                 _messageBus.Publish(new FortressDestroyedEvent());

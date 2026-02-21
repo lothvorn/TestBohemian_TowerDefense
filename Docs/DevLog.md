@@ -66,3 +66,38 @@ Estimated focused development time: 4 hours
 
 ### Next
 - S4: Towers (build on slots, targeting, damage, enemy death + reward economy) and basic HUD feedback.
+
+
+
+
+## S4 – Towers: Targeting, Damage & Shot Feecback
+Estimated focused development time: 5 hours
+
+### Done
+-Implemented tower firing driven by TowerDefinition stats (range, fire rate, damage).
+-Added closest-enemy-in-range targeting in EnemiesService (no physics queries).
+-Wired damage pipeline: TowerView publishes DamageEnemyCommand, ApplyDamageToEnemyUseCase applies damage to Enemy and updates Wallet/Score, then publishes EnemyKilledEvent.
+-Extended IEnemyLifecycle to expose EnemyEntity to keep the targeting/damage flow simple and avoid extra lookups.
+-Added wave completion + “all enemies cleared” end condition: after AllWavesSpawned, publish AllEnemiesKilled when the alive enemy count reaches zero.
+-Added minimal shot feedback using a LineRenderer view component triggered via a UnityEvent fired from TowerView.
+
+### Notes
+Pragmatic time-boxed trade-off: some Application commands/events carry runtime handles (Unity/Framework objects). Examples: TowerBuiltEvent includes TowerSlot and TowerDefinition, and several messages carry IEnemyLifecycle. In a larger project, this would be replaced by ID-only messages resolved through registries/repositories to keep Application/Domain fully Unity-agnostic.
+
+### Future extensions
+
+#### Towers configurable targeting
+-Add configurable targeting strategies per tower (e.g. Closest/First/Last/Strongest) as a pluggable strategy or TowerDefinition setting.
+-Set by a new use case SetTargetingStrategy
+-Current targeting is centralized in EnemiesService, so introducing a strategy parameter is localized and avoids touching the damage/economy pipeline.
+-Keeps TowerView simple (request target → shoot) while enabling richer gameplay variety.
+
+#### Additional tower types
+-New TowerDefinition assets (different range/fireRate/damage, cost balancing).
+-This fits naturally because tower behavior is already driven by data (TowerDefinition) and instantiation is handled by the existing build pipeline (BuildTowerOnSlot → TowerBuiltEvent → TowerService).
+-Allows scaling content without changing code, and demonstrates the intended data-driven approach.
+
+#### Refactor to keep Unity dependencies inside Framework
+-Enforce asmdef boundaries, replace runtime handles in Application messages with IDs + registries/mapping).
+-Convenient to improve portability/testability: Application/Domain become plain C# and can be unit-tested without Unity, while Framework becomes the only Unity integration layer.
+-Reduces coupling, make dependencies more explicit and visible and makes features like replay, or networking easier (messages carry IDs instead of live scene references).

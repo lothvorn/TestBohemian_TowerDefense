@@ -6,8 +6,8 @@ using UnityEngine.UI;
 namespace Framework.UI
 {
     public class MainMenuView : MonoBehaviour
-    {
-        [FormerlySerializedAs("startButton")] [SerializeField] private Button _startButton;
+    { 
+        [SerializeField] private Button _startButton;
 
         public event Action StartClicked;
 

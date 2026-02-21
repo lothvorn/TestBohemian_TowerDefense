@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8950429241135697752}
   - component: {fileID: 312489193274333219}
   - component: {fileID: 5747743719200265114}
+  - component: {fileID: 5912853384067909863}
   m_Layer: 0
   m_Name: TowerSlot
   m_TagString: Untagged
@@ -154,3 +155,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerAnchor: {fileID: 5226211727678934907}
+  towerCost: 5
+--- !u!114 &5912853384067909863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417944739898452504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b55571a2a2485ba3838e689ed1e21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerSlot: {fileID: 5747743719200265114}
+  towerDefinition: {fileID: 11400000, guid: e9610c262c54b6f438a22419701af6be, type: 2}

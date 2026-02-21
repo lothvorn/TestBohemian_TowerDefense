@@ -24,16 +24,19 @@ namespace Framework.Runtime.Enemies
         
         [Min(1)]
         [SerializeField] private int _strength = 1;
+        [SerializeField] private int _score = 1;
 
         public EnemyView Prefab => _prefab;
         public float Speed => _speed;
         public int MaxHealth => _maxHealth;
         public int Reward => _reward;
         public int Strength => _strength;
+        public int Score => _score;
         
-        public Enemy CreateEnemyEntity()
+        
+        public Enemy CreateEnemyEntity(string name)
         {
-            return new Enemy(Speed, MaxHealth,Reward,Strength);
+            return new Enemy(Speed, MaxHealth,Reward,Strength, Score, name);
         }
 
         

@@ -1,6 +1,5 @@
 ﻿using Domain;
 using Framework.Runtime.Interfaces;
-using Framework.Runtime.Path;
 using UnityEngine;
 
 namespace Framework.Runtime.Enemies
@@ -14,6 +13,7 @@ namespace Framework.Runtime.Enemies
         public void SetEnemyEntity(Enemy enemyModel)
         {
             enemyEntity = enemyModel;
+            gameObject.name = enemyEntity.Name;
         }
     }
 }

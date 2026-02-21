@@ -1,18 +1,23 @@
-﻿using Framework.Runtime.Interfaces;
+﻿using Application.Interfaces;
+using Domain;
 using Framework.Runtime.Services;
 using UnityEngine;
 
 namespace Framework.Runtime.Enemies
 {
-    public class IEnemyLIfecycle : MonoBehaviour, IEnemyLyfecicle
+    public class EnemyLifecycle : MonoBehaviour, IEnemyLifecycle
     {
         private EnemiesService _enemiesService;
-        
-        public void Initialize (EnemiesService enemiesService)
+        public Transform Transform => transform;
+        public Enemy EnemyEntity { get; private set; }
+
+
+        public void Initialize (EnemiesService enemiesService, Enemy enemyEntity)
         {
             _enemiesService = enemiesService;
+            EnemyEntity = enemyEntity;
         }
-        
+
         public void Despawn()
         {
             _enemiesService.Unregister(this);

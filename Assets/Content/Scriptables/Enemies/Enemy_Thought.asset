@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2703679742207324308, guid: f83c089de35707548a89b7ec4bd3aa24, type: 3}
   _speed: 1.5
-  _maxHealth: 30
-  _reward: 3
+  _maxHealth: 10
+  _reward: 4
   _strength: 2
+  _score: 1

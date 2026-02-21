@@ -2,7 +2,7 @@
 
 namespace Application.Events
 {
-    public struct FortressDestroyedEvent : IEvent
+    public readonly struct FortressDestroyedEvent : IEvent
     {
         
     }
